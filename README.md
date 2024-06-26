@@ -19,6 +19,14 @@ To get started with Mathanador, follow these simple steps:
 ## Screenshots
 
 
+### User Menu
+
+![User Registration](images/menu.jpg)
+### User Registration
+
+![User Registration](images/user_registration.png)
+
+
 ### Main Gameplay Screen
 
 ![Main Gameplay](images/game_play.jpg)
