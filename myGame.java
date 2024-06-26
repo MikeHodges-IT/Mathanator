@@ -7,28 +7,41 @@ import java.util.Collections;
  * Created by Mike on 11/11/2014.
  */
 public class myGame {
-     int[][]dataChoice;
-     int intTable;
-     int counter;
-     int[] datNum = {0, 1,  2,  3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
-     int[] table  = {1, 10, 11, 2, 5, 3, 9, 4, 6, 7, 8, 12};
+    // 2D array to store choices
+    int[][] dataChoice;
+    // Variable to store the selected table number
+    int intTable;
+    // Counter variable for tracking purposes
+    int counter;
+    // Array of numbers from 0 to 12 for some operation
+    int[] datNum = {0, 1,  2,  3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+    // Array representing a specific table structure or values
+    int[] table  = {1, 10, 11, 2, 5, 3, 9, 4, 6, 7, 8, 12};
+    // ArrayList to store random answers
     ArrayList<Integer> randAns = new ArrayList<Integer>();
+    // ArrayList to store a random set of 4 numbers
     ArrayList<Integer> randNum4 = new ArrayList<Integer>();
+    // ArrayList to store a random set of 13 numbers
     ArrayList<Integer> randNum13 = new ArrayList<Integer>();
 
 
     public myGame(int level) {
-
+        // Set the table number based on the level argument
         intTable = table[level-1];
+        // Populate randNum4 with numbers 0 through 3
         for (int i = 0; i <= 3;  ++i) randNum4.add(i);
+        // Populate randNum13 with numbers 0 through 12
         for (int i = 0; i <= 12; ++i) randNum13.add(i);
+        // Shuffle the elements in randNum13 to randomize the order
         Collections.shuffle(randNum13);
-        Collections.shuffle(randNum4 );
+        // Shuffle the elements in randNum4 to randomize the order
+        Collections.shuffle(randNum4);
+        // Initialize the counter to 0
         counter = 0;
 
-
-
-         switch (intTable) {
+        // Initiates a switch statement based on intTable, which indicates the game level.
+        // The first row contains the correct answer, while subsequent rows hold plausible but incorrect answers.
+        switch (intTable) {
             case 1:
 
                 int[][] dataChoice01 = {{0, 1, 2,  3,  4,  5,  6, 7,   8,  9, 10,  11, 12},
@@ -165,13 +178,18 @@ public class myGame {
 
 
         }
+        // Clear the randAns ArrayList to prepare for new answers
         randAns.clear();
+
+        // Add correct and plausible incorrect answers to randAns from dataChoice based on counter and shuffled indexes
         randAns.add(dataChoice[0][randNum13.get(counter)]);
         randAns.add(dataChoice[1][randNum13.get(counter)]);
         randAns.add(dataChoice[2 + randNum4.get(0)][randNum13.get(counter)]);
         randAns.add(dataChoice[2 + randNum4.get(1)][randNum13.get(counter)]);
 
+        // Shuffle randAns to randomize the order of answers presented to the user
         Collections.shuffle(randAns);
+        // Shuffle randNum4 to ensure a varied selection of plausible incorrect answers in future iterations
         Collections.shuffle(randNum4);
 
 
@@ -179,51 +197,77 @@ public class myGame {
 
 
 
+    // Retrieves the text for the first button based on the first element in randAns
     public String getButtonText01() {
-     return randAns.get(0)+"";
+        return randAns.get(0) + "";
     }
+
+    // Retrieves the text for the second button based on the second element in randAns
     public String getButtonText02() {
-        return randAns.get(1)+"";
+        return randAns.get(1) + "";
     }
+
+    // Retrieves the text for the third button based on the third element in randAns
     public String getButtonText03() {
-        return randAns.get(2)+"";
+        return randAns.get(2) + "";
     }
+
+    // Retrieves the text for the fourth button based on the fourth element in randAns
     public String getButtonText04() {
-        return randAns.get(3)+"";
+        return randAns.get(3) + "";
     }
+
+    // Returns the current value of the counter
     public int getCount() {
-
-       return counter;
+        return counter;
     }
-    public void setCounterNext(){
-        counter++;
-        if(!isGameOver()) {
 
-            randAns.clear();
+
+    // Increments the counter and updates the game state if the game is not over
+    public void setCounterNext() {
+        counter++; // Increment the game counter
+
+        // Check if the game has not ended
+        if (!isGameOver()) {
+            randAns.clear(); // Clear the list of random answers for a fresh start
+
+            // Add new answers to the list based on the current counter value
+            // The first two answers are directly from the dataChoice array using the counter as an index
             randAns.add(dataChoice[0][randNum13.get(counter)]);
             randAns.add(dataChoice[1][randNum13.get(counter)]);
+            // The next two answers are chosen from shuffled positions to add variety
             randAns.add(dataChoice[2 + randNum4.get(0)][randNum13.get(counter)]);
             randAns.add(dataChoice[2 + randNum4.get(1)][randNum13.get(counter)]);
-            Collections.shuffle(randAns);
-            Collections.shuffle(randNum4);
 
+            Collections.shuffle(randAns); // Shuffle the answers to randomize their order
+            Collections.shuffle(randNum4); // Shuffle the selection indices for future use
         }
+    }
 
+    // Resets the game counter to start over
+    public void setCounterReset() {
+        counter = 0; // Reset counter to zero
     }
-    public void setCounterReset(){
-        counter = 0;
-    }
+
+    // Retrieves the correct answer for the current question
     public String getCorrectAnswer() {
-        return dataChoice[0][randNum13.get(counter)]+"";
+        // Returns the correct answer from dataChoice based on the current counter
+        return dataChoice[0][randNum13.get(counter)] + "";
     }
-    public String getEquation(){
+
+    // Generates the equation text for the current question
+    public String getEquation() {
+        // Constructs the equation string using the current question number and table
         String equationText = datNum[randNum13.get(counter)] + " X " + intTable + " = ";
-         return equationText;
+        return equationText; // Returns the constructed equation text
     }
-    public boolean isGameOver  (){
-        if (counter > 12){
+
+    // Checks if the game is over based on the counter's value
+    public boolean isGameOver() {
+        // Returns true if the counter exceeds 12, indicating all questions have been attempted
+        if (counter > 12) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }

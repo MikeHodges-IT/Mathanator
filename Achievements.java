@@ -1,6 +1,5 @@
 package app.math.com.mathanador;
 
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -11,139 +10,116 @@ import android.widget.SimpleAdapter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
+// This class represents the achievements that a player can earn in a game.
+// It displays achievements in a list with details like game level, score, and associated icons.
 public class Achievements extends Activity {
 
+    // Arrays to hold achievement data.
+    String []  aGame;     // Games associated with achievements
+    String []  aLevel;    // Levels of games
+    // String []  aDescription; // Descriptions for achievements (commented out as not used)
+    String []  aScore;    // Scores associated with achievements
+    String []  aUser;     // User information
+    Integer []  aBronze;  // IDs of bronze icons
+    Integer []  aSilver;  // IDs of silver icons
+    Integer []  aGold;    // IDs of gold icons
 
-    String []  aGame;
-    String []  aLevel;
-    //String []  aDescription;
-    String []  aScore;
-    String []  aUser;
-    Integer []  aBronze;
-    Integer []  aSilver;
-    Integer []  aGold;
-
+    // Array to return from database
     String[][] aReturnArray;
-    //new
-    ListView list,list_head;
-    ArrayList<HashMap<String, String>> mylist, mylist_title;
-    ListAdapter adapter_title, adapter;
-    HashMap<String, String> map1, map2;
-    ImageView iv;
 
-//new
+    // UI components
+    ListView list, list_head; // List views for achievements and headers
+    ArrayList<HashMap<String, String>> mylist, mylist_title; // Data structures for list items
+    ListAdapter adapter_title, adapter; // Adapters for binding data to list views
+    HashMap<String, String> map1, map2; // Maps for storing temporary data
+    ImageView iv; // Image view for displaying icons
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_achievements);
 
+        // Retrieve user key from global application state
         app userKey = ((app) getApplicationContext());
         final long KEY_ID_USER = userKey.getUserID();
 
+        // Open database and fetch achievement data
         GameData info = new GameData(this);
-
-
         info.open();
         aReturnArray = info.getScoreArray(KEY_ID_USER);
         info.close();
 
-        aGame         = new String[aReturnArray.length];
-        aLevel        = new String[aReturnArray.length];
-        //aDescription  = new String[aReturnArray.length];
-        aUser         = new String[aReturnArray.length];
-        aScore        = new String[aReturnArray.length];
-        aBronze       = new Integer[aReturnArray.length];
-        aSilver       = new Integer[aReturnArray.length];
-        aGold         = new Integer[aReturnArray.length];
+        // Initialize arrays based on the size of the returned data
+        int arrayLength = aReturnArray.length;
+        aGame = new String[arrayLength];
+        aLevel = new String[arrayLength];
+        aScore = new String[arrayLength];
+        aBronze = new Integer[arrayLength];
+        aSilver = new Integer[arrayLength];
+        aGold = new Integer[arrayLength];
 
-        for (int r=0; r < aReturnArray.length; r++) {
-            aGame[r]  = aReturnArray[r][0];
+        // Populate the arrays with data
+        for (int r = 0; r < arrayLength; r++) {
+            aGame[r] = aReturnArray[r][0];
             aLevel[r] = aReturnArray[r][1];
             aScore[r] = aReturnArray[r][2];
-            aBronze[r] = R.drawable.gold;
+            aBronze[r] = R.drawable.gold; // Assigning gold drawable to all bronze? (possible error)
             aSilver[r] = R.drawable.silver;
-            aGold[r]   = R.drawable.gold;}
-
-                                    /***get the ids****************/
-            list = (ListView) findViewById(R.id.listView2);
-            list_head = (ListView) findViewById(R.id.listView1);
-            iv =  (ImageView)findViewById(R.id.bronze);
-
-
-            showActivity();
-
-    }
-
-    private void showActivity() {
-        mylist = new ArrayList<HashMap<String, String>>();
-        mylist_title = new ArrayList<HashMap<String, String>>();
-
-        /**********Display the headings************/
-
-
-        map1 = new HashMap<String, String>();
-
-        map1.put("one",    "GAME");
-        map1.put("two",    " LEVEL");
-        map1.put("three",  " SCORE");
-
-        mylist_title.add(map1);
-
-
-
-        try {
-            adapter_title = new SimpleAdapter(this, mylist_title, R.layout.activity_achievement_row2,
-                    new String[] { "one", "two","three" }, new int[] {
-                    R.id.one, R.id.two, R.id.three, R.id.four });
-            list_head.setAdapter(adapter_title);
-
-
-        } catch (Exception e) {
-
+            aGold[r] = R.drawable.gold;
         }
 
-        /********************************************************/
+        // Set up the list views and image view
+        list = (ListView) findViewById(R.id.listView2);
+        list_head = (ListView) findViewById(R.id.listView1);
+        iv = (ImageView) findViewById(R.id.bronze);
 
+        // Show the achievements in the list
+        showActivity();
+    }
 
-        /**********Display the contents************/
+    // Method to set up the activity display
+    private void showActivity() {
+        // Initialize lists for titles and content
+        mylist = new ArrayList<>();
+        mylist_title = new ArrayList<>();
 
+        // Set up the heading for the list
+        map1 = new HashMap<>();
+        map1.put("one", "GAME");
+        map1.put("two", " LEVEL");
+        map1.put("three", " SCORE");
+        mylist_title.add(map1);
+
+        // Attempt to set an adapter for the header list view
+        try {
+            adapter_title = new SimpleAdapter(this, mylist_title, R.layout.activity_achievement_row2,
+                    new String[]{"one", "two", "three"}, new int[]{R.id.one, R.id.two, R.id.three});
+            list_head.setAdapter(adapter_title);
+        } catch (Exception e) {
+            // Handle exceptions
+        }
+
+        // Populate the content list with achievement data
         for (int i = 0; i < aGame.length; i++) {
-            map2 = new HashMap<String, String>();
-
-            map2.put("one",     aGame[i]);
-            map2.put("two",    "Level " +     aLevel[i]);
-            map2.put("three",   "Best Time" + aScore[i]);
-            if(Integer.parseInt(aScore[i]) < 90000){
-                map2.put("bronze",  Integer.toString(R.drawable.bronze));
-            }else{
-                map2.put("bronze",  Integer.toString(R.drawable.none));
-            }
-            if(Integer.parseInt(aScore[i]) < 45000){
-                map2.put("silver",  Integer.toString(R.drawable.silver));
-            }else{
-                map2.put("silver",  Integer.toString(R.drawable.none));
-            }
-            if(Integer.parseInt(aScore[i]) < 30000){
-                map2.put("gold",  Integer.toString(R.drawable.gold));
-            }else{
-                map2.put("gold",  Integer.toString(R.drawable.none));
-            }
+            map2 = new HashMap<>();
+            map2.put("one", aGame[i]);
+            map2.put("two", "Level " + aLevel[i]);
+            map2.put("three", "Best Time" + aScore[i]);
+            // Set icon drawables based on score thresholds
+            map2.put("bronze", Integer.toString(aScore[i].compareTo("90000") < 0 ? R.drawable.bronze : R.drawable.none));
+            map2.put("silver", Integer.toString(aScore[i].compareTo("45000") < 0 ? R.drawable.silver : R.drawable.none));
+            map2.put("gold", Integer.toString(aScore[i].compareTo("30000") < 0 ? R.drawable.gold : R.drawable.none));
             mylist.add(map2);
         }
 
-
+        // Attempt to set an adapter for the main list view
         try {
             adapter = new SimpleAdapter(this, mylist, R.layout.activity_achievement_row,
-                    new String[] { "one", "two","three","bronze","silver","gold" }, new int[] {
-                    R.id.one, R.id.two,R.id.three, R.id.bronze,R.id.silver,R.id.gold});
+                    new String[]{"one", "two", "three", "bronze", "silver", "gold"}, new int[]{
+                    R.id.one, R.id.two, R.id.three, R.id.bronze, R.id.silver, R.id.gold});
             list.setAdapter(adapter);
         } catch (Exception e) {
-
+            // Handle exceptions
         }
-
-        /********************************************************/
-
     }
 }
