@@ -18,17 +18,15 @@ To get started with Mathanador, follow these simple steps:
 
 ## Screenshots
 
-### User Menu
-
-![User Registration](images/menu.jpg)
 
 ### Main Gameplay Screen
 
-![Main Gameplay](images/main_gameplay.png)
+![Main Gameplay](images/game_play.jpg)
+![Correct](images/correct.jpg)
+![False](images/false.jpg)
+![Awards](images/award.jpg)
+![Video](images/mathanator_movie.mp4)
 
-### Scoreboard
-
-!Scoreboard
 
 ## Contributing
 
