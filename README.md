@@ -25,8 +25,9 @@ To get started with Mathanador, follow these simple steps:
 ![Awards](images/award.jpg)
 
 ### Video
+### Video
 
-<video  src="images/mathanator_movie.mp4" type="video/mp4" />
+[![Mathanator Gameplay](images/mathanator_movie.mp4)
 
 
 ## Contributing
