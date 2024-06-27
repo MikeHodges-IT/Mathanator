@@ -29,11 +29,7 @@ To get started with Mathanador, follow these simple steps:
 
 ### Video
 
-<<<<<<< HEAD
-[![Mathanator Gameplay](https://github.com/MikeHodges-IT/mathanator/raw/main/images/game_play.jpg)](https://github.com/MikeHodges-IT/mathanator/raw/main/images/mathanator_movie.mp4)
-=======
 [![Mathanator Gameplay](https://github.com/MikeHodges-IT/mathanator/raw/main/images/mathanator_movie.mp4)](https://github.com/MikeHodges-IT/mathanator/raw/main/images/mathanator_movie.mp4)
->>>>>>> ca972e7eb9f0776d20d1fd68b35781da5caf865d
 
 
 ## Contributing
