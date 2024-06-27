@@ -26,7 +26,7 @@ To get started with Mathanador, follow these simple steps:
 
 ### Video
 
-<video  src="images/mathanator_movie.mp4" type="video/mp4" />
+<video  src="images/mathanator_movie.mp4" width = "180" />
 
 
 ## Contributing
