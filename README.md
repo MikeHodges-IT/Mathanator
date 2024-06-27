@@ -19,15 +19,16 @@ To get started with Mathanador, follow these simple steps:
 ## Screenshots
 ### Main Gameplay Screen
 
-![Main Gameplay](images/game_play.jpg)
-![Correct](images/correct.jpg)
-![False](images/false.jpg)
-![Awards](images/award.jpg)
+![Main Gameplay](./images/game_play.jpg)
+![Correct](./images/correct.jpg)
+![False](./images/false.jpg)
+![Awards](./images/award.jpg)
+
 
 
 ### Video
 
-[![Mathanator Gameplay](https://github.com/MikeHodges-IT/mathanator/blob/main/images/mathanator_movie.mp4)]
+[![Mathanator Gameplay](https://github.com/MikeHodges-IT/mathanator/raw/main/images/mathanator_movie.mp4)](https://github.com/MikeHodges-IT/mathanator/raw/main/images/mathanator_movie.mp4)
 
 
 ## Contributing
