@@ -1,6 +1,6 @@
 # Mathanator
 
-Mathanador is an engaging math game designed to help users of all ages improve their arithmetic skills through a series of challenging questions and fun gameplay. Whether you're a student looking to sharpen your math abilities or an adult seeking a brain workout, Mathanador offers an entertaining way to enhance your numerical prowess.
+Mathanator is an engaging math game designed to help users of all ages improve their multiplication skills through a series of challenging questions and fun gameplay. Whether you're a student looking to sharpen your math abilities or an adult seeking a brain workout, Mathanator offers an entertaining way to enhance your numerical prowess.
 
 ## Features
 
@@ -32,7 +32,7 @@ https://github.com/MikeHodges-IT/mathanator/assets/69166570/52868674-7834-4eb4-9
 
 ## Contributing
 
-We welcome contributions to Mathanador! If you have suggestions for improvements or new features, please feel free to fork the repository and submit a pull request.
+We welcome contributions to Mathanator! If you have suggestions for improvements or new features, please feel free to fork the repository and submit a pull request.
 
 ## License
 
